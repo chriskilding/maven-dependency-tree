@@ -1,0 +1,2 @@
+org.apache.maven.its.dependency-tree:deprecated:jar:1.0-SNAPSHOT
+\- org.hamcrest:hamcrest:jar:2.2:compile [deprecated]

@@ -189,6 +189,13 @@ public class DefaultDependencyNode implements DependencyNode
 
         buffer.append( artifact );
 
+        final boolean deprecated = false;
+        if ( deprecated )
+        {
+            buffer.append( " " );
+            buffer.append( "[deprecated]" );
+        }
+
         return buffer.toString();
     }
 }
