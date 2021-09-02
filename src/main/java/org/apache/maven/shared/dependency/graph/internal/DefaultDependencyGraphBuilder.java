@@ -39,7 +39,6 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
  * Default dependency graph builder that detects current Maven version to delegate to either Maven 3.0 or 3.1+ specific
  * code.
  *
- * @see Maven3DependencyGraphBuilder
  * @see Maven31DependencyGraphBuilder
  * @author Hervé Boutemy
  * @since 2.0

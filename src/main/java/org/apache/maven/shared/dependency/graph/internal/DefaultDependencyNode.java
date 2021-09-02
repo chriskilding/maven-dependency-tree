@@ -22,6 +22,9 @@ package org.apache.maven.shared.dependency.graph.internal;
 import java.util.List;
 
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.repository.metadata.ArtifactRepositoryMetadata;
+import org.apache.maven.artifact.repository.metadata.Metadata;
+import org.apache.maven.artifact.repository.metadata.RepositoryMetadata;
 import org.apache.maven.model.Exclusion;
 import org.apache.maven.shared.dependency.graph.DependencyNode;
 import org.apache.maven.shared.dependency.graph.traversal.DependencyNodeVisitor;
@@ -189,13 +192,26 @@ public class DefaultDependencyNode implements DependencyNode
 
         buffer.append( artifact );
 
-        final boolean deprecated = false;
-        if ( deprecated )
+        if ( isDeprecated( artifact ) )
         {
             buffer.append( " " );
             buffer.append( "[deprecated]" );
         }
 
         return buffer.toString();
+    }
+
+    private static boolean isDeprecated( Artifact artifact )
+    {
+        // what about snapshots? Do we need to test for them and use SnapshotArtifactRepositoryMetadata instead?
+        // will this trigger an online lookup for every single artifact, or is it smart enough to use the .m2 cache?
+        final RepositoryMetadata repositoryMetadata = new ArtifactRepositoryMetadata( artifact );
+
+        final Metadata metadata = repositoryMetadata.getMetadata();
+
+        // Should this always return false if this is the top-level artifact (the Maven project currently being built)
+
+        // unbox nullable Boolean
+        return false; //metadata.isDeprecated() != null && metadata.isDeprecated();
     }
 }
